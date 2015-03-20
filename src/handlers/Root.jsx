@@ -3,14 +3,16 @@ var { RouteHandler } = require('react-router');
 
 module.exports = React.createClass({
   render: function() {
-    <html>
-      <head>
-        <title>React Router static site</title>
-      </head>
-      <body>
-        <h1>React Router static site</h1>
-        <RouteHandler {...this.props} />
-      </body>
-    </html>
+    return (
+      <html>
+        <head>
+          <title>React Router static site</title>
+        </head>
+        <body>
+          <h1>React Router static site</h1>
+          <RouteHandler {...this.props} />
+        </body>
+      </html>
+    )
   }
 });
