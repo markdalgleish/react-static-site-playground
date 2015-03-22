@@ -13,6 +13,6 @@ module.exports = React.createClass({
           <RouteHandler {...this.props} />
         </body>
       </html>
-    )
+    );
   }
 });
