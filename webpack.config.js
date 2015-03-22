@@ -14,11 +14,12 @@ module.exports = {
   },
 
   plugins: [
-    new ReactRouterToHtmlPlugin('routes.js', [
-      '/',
-      // Only the first path is rendered for now, to keep it simple
-      // '/hello',
-      // '/world'
-    ])
+    new ReactRouterToHtmlPlugin('routes.js', {
+      paths: [
+        '/',
+        '/hello',
+        '/world'
+      ]
+    })
   ]
 };

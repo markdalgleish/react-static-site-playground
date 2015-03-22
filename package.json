@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack"
+    "start": "rm -rf dist/* && webpack"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "devDependencies": {
     "babel-core": "^4.7.13",
     "babel-loader": "^4.2.0",
+    "bluebird": "^2.9.14",
     "eval": "^0.1.0",
     "react": "^0.12.2",
     "react-router": "^0.12.4",

@@ -7,7 +7,7 @@ var Hello = require('./handlers/Hello.jsx');
 var World = require('./handlers/World.jsx');
 
 var Routes = (
-  <Route handler={Root} path="/">
+  <Route name="root" handler={Root} path="/">
     <Route name="hello" handler={Hello} />
     <Route name="world" handler={World} />
   </Route>
