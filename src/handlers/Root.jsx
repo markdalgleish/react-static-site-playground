@@ -15,8 +15,8 @@ module.exports = React.createClass({
           <nav>
             <ul>
               <li><Link to="root">Home</Link></li>
-              <li><Link to="hello">Hello</Link></li>
-              <li><Link to="world">World</Link></li>
+              <li><Link to="blog" params={{ postName: 'hello-world' }}>Hello World</Link></li>
+              <li><Link to="blog" params={{ postName: 'another-post' }}>Another Post</Link></li>
             </ul>
           </nav>
           <main>

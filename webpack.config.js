@@ -10,15 +10,18 @@ module.exports = {
   },
 
   module: {
-    loaders: [{ test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ }]
+    loaders: [
+      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.json$/, loader: 'json-loader' }
+    ]
   },
 
   plugins: [
     new ReactRouterToHtmlPlugin('routes.js', {
       paths: [
         '/',
-        '/hello',
-        '/world'
+        '/blog/hello-world',
+        '/blog/another-post',
       ]
     })
   ]
