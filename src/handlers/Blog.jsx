@@ -4,8 +4,16 @@ var { State } = require('react-router');
 module.exports = React.createClass({
   mixins: [ State ],
 
-  getInitialState: function() {
+  getPost: function() {
     return require('../../posts/' + this.getParams().postName + '.json');
+  },
+
+  getInitialState: function() {
+    return this.getPost();
+  },
+
+  componentWillReceiveProps: function() {
+    this.setState(this.getPost());
   },
 
   render: function() {

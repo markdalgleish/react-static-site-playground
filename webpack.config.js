@@ -3,12 +3,16 @@ var fs = require('fs');
 var ejs = require('ejs');
 
 module.exports = {
-  entry: './src/routes.jsx',
+  entry: {
+    index: './src/index.jsx',
+    routes: './src/routes.jsx'
+  },
 
   output: {
-    filename: 'routes.js',
+    filename: '[name].js',
     path: 'dist',
-    libraryTarget: 'commonjs2'
+    publicPath: '/',
+    libraryTarget: 'umd'
   },
 
   module: {
@@ -22,8 +26,8 @@ module.exports = {
     new ReactRouterToHtmlPlugin('routes.js', {
       paths: [
         '/',
-        '/blog/hello-world',
-        '/blog/another-post',
+        '/blog/hello-world/',
+        '/blog/another-post/',
       ],
       template: ejs.compile(fs.readFileSync(__dirname + '/src/template.ejs', 'utf-8'))
     })

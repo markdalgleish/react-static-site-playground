@@ -5,6 +5,6 @@ Warning: This is still very much a work in progress. Also, this might be a terri
 ## Run it
 
 ```bash
-npm install
-npm start
+$ npm install
+$ npm start
 ```
