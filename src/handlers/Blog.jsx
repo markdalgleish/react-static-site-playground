@@ -1,11 +1,13 @@
 var React = require('react');
-var { State } = require('react-router');
 
 module.exports = React.createClass({
-  mixins: [ State ],
+
+  contextTypes: {
+    router: React.PropTypes.func
+  },
 
   getPost: function() {
-    return require('../../posts/' + this.getParams().postName + '.json');
+    return require('../../posts/' + this.context.router.getCurrentParams().postName + '.json');
   },
 
   getInitialState: function() {

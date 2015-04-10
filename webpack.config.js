@@ -1,11 +1,17 @@
-var ReactRouterToHtmlPlugin = require('./lib/react-router-to-html-webpack-plugin');
+var EvalWebpackPlugin = require('./lib/eval-webpack-plugin');
 var fs = require('fs');
 var ejs = require('ejs');
+
+var paths = [
+  '/',
+  '/blog/hello-world/',
+  '/blog/another-post/'
+];
 
 module.exports = {
   entry: {
     index: './src/index.jsx',
-    routes: './src/routes.jsx'
+    render: './src/render.jsx'
   },
 
   output: {
@@ -22,14 +28,5 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new ReactRouterToHtmlPlugin('routes.js', {
-      paths: [
-        '/',
-        '/blog/hello-world/',
-        '/blog/another-post/',
-      ],
-      template: ejs.compile(fs.readFileSync(__dirname + '/src/template.ejs', 'utf-8'))
-    })
-  ]
+  plugins: paths.map(function(path) { return new EvalWebpackPlugin('render.js', path, path); })
 };
