@@ -7,13 +7,10 @@ var paths = [
 ];
 
 module.exports = {
-  entry: {
-    index: './src/index.js',
-    prerender: './src/prerender.js'
-  },
+  entry: './src/index.js',
 
   output: {
-    filename: '[name].js',
+    filename: 'index.js',
     path: 'dist',
     publicPath: '/',
     libraryTarget: 'umd'
@@ -27,5 +24,5 @@ module.exports = {
     ]
   },
 
-  plugins: paths.map(function(path) { return new PrerenderPlugin('prerender.js', path); })
+  plugins: paths.map(function(path) { return new PrerenderPlugin('index.js', path); })
 };
