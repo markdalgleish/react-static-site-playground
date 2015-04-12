@@ -1,4 +1,14 @@
 var PrerenderPlugin = require('./lib/prerender-webpack-plugin');
+var ejs = require('ejs');
+var fs = require('fs');
+
+var template = ejs.compile(fs.readFileSync(__dirname + '/src/template.ejs', 'utf-8'))
+
+var paths = [
+  '/',
+  '/blog/hello-world/',
+  '/blog/another-post/'
+];
 
 module.exports = {
   entry: './src/index.js',
@@ -19,10 +29,6 @@ module.exports = {
   },
 
   plugins: [
-    new PrerenderPlugin('index.js', [
-      '/',
-      '/blog/hello-world/',
-      '/blog/another-post/'
-    ])
+    new PrerenderPlugin('index.js', paths, { template: template })
   ]
 };
