@@ -1,8 +1,8 @@
 var React = require('react');
 var { Route } = require('react-router');
 
-var Root = require('../handlers/Root.jsx');
-var Blog = require('../handlers/Blog.jsx');
+var Root = require('./handlers/Root');
+var Blog = require('./handlers/Blog');
 
 var Routes = (
   <Route name="root" path="/" handler={Root}>

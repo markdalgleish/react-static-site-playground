@@ -1,7 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 
-var Routes = require('./routes/routes.jsx');
+var Routes = require('./routes');
 var template = require('./template.ejs');
 
 module.exports = function(data, callback) {

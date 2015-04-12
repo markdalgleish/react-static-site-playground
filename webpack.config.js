@@ -1,5 +1,4 @@
 var PrerenderPlugin = require('./lib/prerender-webpack-plugin');
-var fs = require('fs');
 
 var paths = [
   '/',
@@ -9,8 +8,8 @@ var paths = [
 
 module.exports = {
   entry: {
-    index: './src/index.jsx',
-    render: './src/render.jsx'
+    index: './src/index.js',
+    prerender: './src/prerender.js'
   },
 
   output: {
@@ -22,11 +21,11 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.ejs$/, loader: 'ejs-compiled-loader' },
       { test: /\.json$/, loader: 'json-loader' }
     ]
   },
 
-  plugins: paths.map(function(path) { return new PrerenderPlugin('render.js', path); })
+  plugins: paths.map(function(path) { return new PrerenderPlugin('prerender.js', path); })
 };
