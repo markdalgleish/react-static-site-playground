@@ -1,24 +1,26 @@
-var React = require('react');
+import React from 'react';
 
-module.exports = React.createClass({
+export default class Blog extends React.Component {
 
-  contextTypes: {
+  static contextTypes = {
     router: React.PropTypes.func
-  },
+  }
 
-  getPost: function() {
-    return require('../../posts/' + this.context.router.getCurrentParams().postName + '.json');
-  },
+  constructor(props, context) {
+    super(props);
 
-  getInitialState: function() {
-    return this.getPost();
-  },
+    this.state = this.getPost(context.router.getCurrentParams().postName);
+  }
 
-  componentWillReceiveProps: function() {
-    this.setState(this.getPost());
-  },
+  getPost(name) {
+    return require('../../posts/' + name + '.json');
+  }
 
-  render: function() {
+  componentWillReceiveProps() {
+    this.setState(this.getPost(this.context.router.getCurrentParams().postName));
+  }
+
+  render() {
     return (
       <div>
         <h1>{ this.state.title }</h1>
@@ -26,4 +28,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+};

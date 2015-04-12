@@ -1,7 +1,7 @@
-var React = require('react');
-var Router = require('react-router');
+import React from 'react';
+import Router from 'react-router';
 
-var Routes = require('./routes');
+import Routes from './routes';
 
 // Client render
 if (typeof document !== 'undefined') {
@@ -11,7 +11,7 @@ if (typeof document !== 'undefined') {
 }
 
 // Render function for prerender-webpack-plugin
-module.exports = function(locals, callback) {
+export default function(locals, callback) {
   Router.run(Routes, locals.path, function(Handler) {
     callback(null, locals.template({
       html: React.renderToString(<Handler />),

@@ -1,13 +1,11 @@
-var React = require('react');
-var { Route } = require('react-router');
+import React from 'react';
+import { Route } from 'react-router';
 
-var Root = require('./handlers/Root');
-var Blog = require('./handlers/Blog');
+import Root from './handlers/Root';
+import Blog from './handlers/Blog';
 
-var Routes = (
+export default (
   <Route name="root" path="/" handler={Root}>
     <Route name="blog" path="blog/:postName/" handler={Blog} />
   </Route>
 );
-
-module.exports = Routes;
