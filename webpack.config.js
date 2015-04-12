@@ -1,4 +1,4 @@
-var EvalWebpackPlugin = require('./lib/eval-webpack-plugin');
+var PrerenderPlugin = require('./lib/prerender-webpack-plugin');
 var fs = require('fs');
 
 var paths = [
@@ -28,5 +28,5 @@ module.exports = {
     ]
   },
 
-  plugins: paths.map(function(path) { return new EvalWebpackPlugin('render.js', path); })
+  plugins: paths.map(function(path) { return new PrerenderPlugin('render.js', path); })
 };
