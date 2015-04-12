@@ -20,12 +20,12 @@
   "devDependencies": {
     "babel-core": "^4.7.13",
     "babel-loader": "^5.0.0",
-    "bluebird": "^2.9.14",
     "ejs": "^2.3.1",
     "eval": "^0.1.0",
     "json-loader": "^0.5.1",
     "react": "^0.13.1",
     "react-router": "^0.13.2",
+    "static-site-generator-webpack-plugin": "^1.0.0",
     "webpack": "^1.7.3"
   }
 }

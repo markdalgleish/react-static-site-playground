@@ -1,4 +1,4 @@
-var PrerenderPlugin = require('./lib/prerender-webpack-plugin');
+var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 var ejs = require('ejs');
 var fs = require('fs');
 
@@ -29,6 +29,6 @@ module.exports = {
   },
 
   plugins: [
-    new PrerenderPlugin('index.js', paths, { template: template })
+    new StaticSiteGeneratorPlugin('index.js', paths, { template: template })
   ]
 };
