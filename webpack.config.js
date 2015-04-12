@@ -1,11 +1,5 @@
 var PrerenderPlugin = require('./lib/prerender-webpack-plugin');
 
-var paths = [
-  '/',
-  '/blog/hello-world/',
-  '/blog/another-post/'
-];
-
 module.exports = {
   entry: './src/index.js',
 
@@ -24,5 +18,11 @@ module.exports = {
     ]
   },
 
-  plugins: paths.map(function(path) { return new PrerenderPlugin('index.js', path); })
+  plugins: [
+    new PrerenderPlugin('index.js', [
+      '/',
+      '/blog/hello-world/',
+      '/blog/another-post/'
+    ])
+  ]
 };
