@@ -1,6 +1,5 @@
 var EvalWebpackPlugin = require('./lib/eval-webpack-plugin');
 var fs = require('fs');
-var ejs = require('ejs');
 
 var paths = [
   '/',
@@ -24,9 +23,10 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.ejs$/, loader: 'ejs-compiled-loader' },
       { test: /\.json$/, loader: 'json-loader' }
     ]
   },
 
-  plugins: paths.map(function(path) { return new EvalWebpackPlugin('render.js', path, path); })
+  plugins: paths.map(function(path) { return new EvalWebpackPlugin('render.js', path); })
 };
