@@ -24,7 +24,7 @@ module.exports = {
     loaders: [
       { test: /\.js$/, loader: 'babel-loader?stage=0', exclude: /node_modules/ },
       { test: /\.ejs$/, loader: 'ejs-compiled-loader' },
-      { test: /\.md$/, loader: 'raw-loader' }
+      { test: /\.md$/, loader: 'html-loader!markdown-loader' }
     ]
   },
 
