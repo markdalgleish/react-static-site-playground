@@ -13,7 +13,7 @@ export default class Blog extends React.Component {
   }
 
   getPost(name) {
-    return require('../../posts/' + name + '.json');
+    return { post: require('../../posts/' + name + '.md') };
   }
 
   componentWillReceiveProps() {
@@ -22,10 +22,7 @@ export default class Blog extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>{ this.state.title }</h1>
-        <p>{ this.state.content }</p>
-      </div>
+      <div dangerouslySetInnerHTML={{ __html: this.state.post }}></div>
     );
   }
 };
