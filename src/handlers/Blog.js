@@ -1,5 +1,7 @@
 import React from 'react';
 
+import BlogPost from '../components/BlogPost';
+
 export default class Blog extends React.Component {
 
   static contextTypes = {
@@ -9,20 +11,20 @@ export default class Blog extends React.Component {
   constructor(props, context) {
     super(props);
 
-    this.state = this.getPost(context.router.getCurrentParams().postName);
+    this.state = this.getBlogPost(context.router.getCurrentParams().postName);
   }
 
-  getPost(name) {
-    return { post: require('../../posts/' + name + '.md') };
+  getBlogPost(name) {
+    return { html: require('../../posts/' + name + '.md') };
   }
 
   componentWillReceiveProps() {
-    this.setState(this.getPost(this.context.router.getCurrentParams().postName));
+    this.setState(this.getBlogPost(this.context.router.getCurrentParams().postName));
   }
 
   render() {
     return (
-      <div dangerouslySetInnerHTML={{ __html: this.state.post }}></div>
+      <BlogPost html={this.state.html} />
     );
   }
 };
