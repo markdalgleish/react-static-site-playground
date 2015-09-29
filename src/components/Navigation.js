@@ -6,9 +6,9 @@ export default class Navigation extends React.Component {
     return (
       <nav>
         <ul>
-          <li><Link to="root">Home</Link></li>
-          <li><Link to="blog" params={{ postName: 'hello-world' }}>Hello World</Link></li>
-          <li><Link to="blog" params={{ postName: 'another-post' }}>Another Post</Link></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/blog/hello-world/">Hello World</Link></li>
+          <li><Link to="/blog/another-post/">Another Post</Link></li>
         </ul>
       </nav>
     );

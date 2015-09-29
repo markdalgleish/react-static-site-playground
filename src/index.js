@@ -1,20 +1,25 @@
 import React from 'react';
-import Router from 'react-router';
+import createLocation from 'history/lib/createLocation';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import { Router, RoutingContext, match } from 'react-router';
 
-import Routes from './routes';
+import routes from './routes';
 
 // Client render
 if (typeof document !== 'undefined') {
-  Router.run(Routes, Router.HistoryLocation, function(Handler) {
-    React.render(<Handler />, document.getElementById('outlet'));
-  });
+  const history = createBrowserHistory();
+  const outlet = document.getElementById('outlet');
+
+  React.render(<Router history={history}>{routes}</Router>, outlet);
 }
 
 // Render function for prerender-webpack-plugin
 export default function(locals, callback) {
-  Router.run(Routes, locals.path, function(Handler) {
+  const location = createLocation(locals.path);
+
+  match({ routes, location }, (error, redirectLocation, renderProps) => {
     callback(null, locals.template({
-      html: React.renderToString(<Handler />),
+      html: React.renderToString(<RoutingContext {...renderProps} />),
       assets: locals.assets
     }));
   });
