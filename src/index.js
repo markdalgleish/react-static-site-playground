@@ -1,13 +1,12 @@
 import React from 'react';
-import createLocation from 'history/lib/createLocation';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
+import { createHistory, createMemoryHistory } from 'history';
 import { Router, RoutingContext, match } from 'react-router';
 
 import routes from './routes';
 
 // Client render
 if (typeof document !== 'undefined') {
-  const history = createBrowserHistory();
+  const history = createHistory();
   const outlet = document.getElementById('outlet');
 
   React.render(<Router history={history}>{routes}</Router>, outlet);
@@ -15,7 +14,8 @@ if (typeof document !== 'undefined') {
 
 // Render function for prerender-webpack-plugin
 export default function(locals, callback) {
-  const location = createLocation(locals.path);
+  const history = createMemoryHistory();
+  const location = history.createLocation(locals.path);
 
   match({ routes, location }, (error, redirectLocation, renderProps) => {
     callback(null, locals.template({
