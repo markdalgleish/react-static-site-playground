@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactDOMServer from 'react-dom/server';
 import { createHistory, createMemoryHistory } from 'history';
 import { Router, RoutingContext, match } from 'react-router';
 
@@ -9,7 +11,7 @@ if (typeof document !== 'undefined') {
   const history = createHistory();
   const outlet = document.getElementById('outlet');
 
-  React.render(<Router history={history}>{routes}</Router>, outlet);
+  ReactDOM.render(<Router history={history}>{routes}</Router>, outlet);
 }
 
 // Render function for prerender-webpack-plugin
@@ -19,7 +21,7 @@ export default function(locals, callback) {
 
   match({ routes, location }, (error, redirectLocation, renderProps) => {
     callback(null, locals.template({
-      html: React.renderToString(<RoutingContext {...renderProps} />),
+      html: ReactDOMServer.renderToString(<RoutingContext {...renderProps} />),
       assets: locals.assets
     }));
   });
