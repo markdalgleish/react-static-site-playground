@@ -14,8 +14,8 @@ if (typeof document !== 'undefined') {
   ReactDOM.render(<Router history={history}>{routes}</Router>, outlet);
 }
 
-// Render function for prerender-webpack-plugin
-export default function(locals, callback) {
+// Render function for static-site-generator-webpack-plugin
+export default (locals, callback) => {
   const history = createMemoryHistory();
   const location = history.createLocation(locals.path);
 
