@@ -4,8 +4,9 @@
   "description": "Starter kit for a static site powered by React and React Router",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --content-base dist/",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "rm -rf dist/* && webpack"
+    "build": "rm -rf dist/* && webpack"
   },
   "repository": {
     "type": "git",
@@ -29,7 +30,8 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-router": "^1.0.0-rc1",
-    "webpack": "^1.7.3"
     "static-site-generator-webpack-plugin": "^1.1.2",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.14.1"
   }
 }

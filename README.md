@@ -7,4 +7,5 @@ Warning: This is still very much a work in progress. Also, this might be a terri
 ```bash
 $ npm install
 $ npm start
+$ open http://localhost:8080
 ```
