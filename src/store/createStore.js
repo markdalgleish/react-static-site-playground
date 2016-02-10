@@ -3,10 +3,8 @@ import thunk from 'redux-thunk';
 
 const counter = (state = 0, action) => {
   switch (action.type) {
-    case 'INCREMENT':
+    case 'VIEW_BLOG_POST':
       return state + 1
-    case 'DECREMENT':
-      return state - 1
     default:
       return state
   }

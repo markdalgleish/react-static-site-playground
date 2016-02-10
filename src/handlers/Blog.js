@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { provideHooks } from 'redial';
 
 import BlogPost from '../components/BlogPost';
 
 const getBlogPost = name => require('../../posts/' + name + '.md');
 
-export default class Blog extends React.Component {
+const hooks = {
+  fetch: ({ dispatch }) => dispatch({ type: 'VIEW_BLOG_POST' })
+};
+
+class Blog extends Component {
 
   render() {
     const { postName } = this.props.params;
@@ -14,3 +19,5 @@ export default class Blog extends React.Component {
     );
   }
 };
+
+export default provideHooks(hooks)(Blog);
