@@ -1,4 +1,4 @@
-# react-static-site-starter
+# react-static-site-playground
 
 Warning: This is still very much a work in progress. Also, this might be a terrible idea.
 
