@@ -17,23 +17,21 @@ if (typeof document !== 'undefined') {
   const store = createStore(window.REDUX_INITIAL_STATE);
   const { dispatch } = store;
 
-  const routerRender = props => {
-    const { components } = props;
-    const locals = { dispatch };
+  browserHistory.listen(location => {
+    match({ routes, location }, (error, redirectLocation, { components }) => {
+      const locals = { dispatch };
 
-    if (window.REDUX_INITIAL_STATE) {
-      delete window.REDUX_INITIAL_STATE;
-    } else {
-      // Ensure state changes don't occur during render
-      setTimeout(() => trigger('fetch', components, locals), 0);
-    }
-
-    return <RouterContext {...props} />;
-  };
+      if (window.REDUX_INITIAL_STATE) {
+        delete window.REDUX_INITIAL_STATE;
+      } else {
+        trigger('fetch', components, locals);
+      }
+    });
+  });
 
   render((
     <Provider store={store}>
-      <Router history={browserHistory} render={routerRender}>
+      <Router history={browserHistory}>
         { routes }
       </Router>
     </Provider>
@@ -48,7 +46,7 @@ export default ({ path, assets, template }, callback) => {
   const history = createMemoryHistory(path);
 
   match({ routes, history }, (error, redirectLocation, renderProps) => {
-    const components = renderProps.routes.map(route => route.component);
+    const { components } = renderProps;
     const locals = { dispatch };
 
     trigger('fetch', components, locals).then(() => {
