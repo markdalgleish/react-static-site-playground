@@ -1,13 +1,12 @@
 <html>
   <head>
     <title>React Static Site</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
   </head>
   <body>
     <h1>React Static Site</h1>
     <div id="outlet"><%- html %></div>
     <script>window.REDUX_INITIAL_STATE = <%- state %>;</script>
-    <% for (var chunk in assets) { -%>
-    <script src="<%= assets[chunk] %>"></script>
-    <% } -%>
+    <script src="/index.js"></script>
   </body>
 </html>
