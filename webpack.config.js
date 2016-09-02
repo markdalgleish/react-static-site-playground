@@ -24,7 +24,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader?modules&localIdentName=[name]__[local]__[hash:base64:5]') },
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('css-loader?modules&localIdentName=[name]__[local]__[emoji]') },
       { test: /\.ejs$/, loader: 'ejs-compiled-loader' },
       { test: /\.md$/, loader: 'html-loader!markdown-loader' }
     ]
