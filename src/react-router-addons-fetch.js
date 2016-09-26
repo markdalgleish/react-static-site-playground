@@ -4,7 +4,7 @@ import History from 'react-history/History';
 import { StaticRouter } from 'react-router';
 import { matchRoutesToLocation } from 'react-router-addons-routes';
 
-const makeCreateLocalsForLocation = routes => location => {
+const makeCreateLocals = routes => location => {
   const matchedRoutes = matchRoutesToLocation(routes, location);
   const components = matchedRoutes.map(route => route.component);
 
@@ -17,10 +17,10 @@ const makeCreateLocalsForLocation = routes => location => {
 
 const makeCreateHistory = (routes, fetch) => (...args) => {
   const history = createBrowserHistory(...args);
-  const createLocalsForLocation = makeCreateLocalsForLocation(routes);
+  const createLocals = makeCreateLocals(routes);
 
-  fetch(createLocalsForLocation(history.location));
-  history.listen(location => fetch(createLocalsForLocation(location)));
+  fetch(createLocals(history.location));
+  history.listen(location => fetch(createLocals(location)));
 
   return history;
 };
@@ -53,4 +53,16 @@ BrowserRouter.propTypes = {
   ])
 };
 
-export { BrowserRouter };
+const serverFetch = ({ routes, fetch, location }) => {
+  try {
+    const createLocals = makeCreateLocals(routes);
+    const locals = createLocals(location);
+    const result = fetch(locals);
+
+    return Promise.resolve(result);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+};
+
+export { BrowserRouter, serverFetch };
