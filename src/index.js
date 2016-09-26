@@ -9,7 +9,7 @@ import { ServerRouter, createServerRenderContext } from 'react-router';
 import { Provider as StoreProvider } from 'react-redux';
 import { trigger } from 'redial';
 
-import { BrowserRouter, serverPrefetch } from './react-router-prefetch';
+import { BrowserRouter, serverPrefetch } from './react-router-addons-prefetch';
 import createStore from './store/createStore';
 import routes from './routes';
 import App from './App';
@@ -21,7 +21,7 @@ const makePrefetch = ({ store }) => ({ components }) => {
   if (typeof window !== 'undefined' && window.REDUX_INITIAL_STATE) {
     delete window.REDUX_INITIAL_STATE;
   } else {
-    return trigger('fetch', components, locals);
+    return trigger('prefetch', components, locals);
   }
 };
 

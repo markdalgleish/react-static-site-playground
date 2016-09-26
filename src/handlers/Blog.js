@@ -6,7 +6,7 @@ import BlogPost from '../components/BlogPost';
 const getBlogPost = name => require('../../posts/' + name + '.md');
 
 const hooks = {
-  fetch: ({ dispatch }) => dispatch({ type: 'VIEW_BLOG_POST' })
+  prefetch: ({ dispatch }) => dispatch({ type: 'VIEW_BLOG_POST' })
 };
 
 class Blog extends Component {
