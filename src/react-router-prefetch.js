@@ -15,19 +15,19 @@ const makeCreateLocals = routes => location => {
   };
 };
 
-const makeCreateHistory = (routes, fetch) => (...args) => {
+const makeCreateHistory = (routes, prefetch) => (...args) => {
   const history = createBrowserHistory(...args);
   const createLocals = makeCreateLocals(routes);
 
-  fetch(createLocals(history.location));
-  history.listen(location => fetch(createLocals(location)));
+  prefetch(createLocals(history.location));
+  history.listen(location => prefetch(createLocals(location)));
 
   return history;
 };
 
-const BrowserRouter = ({ routes, fetch, basename, keyLength, ...rest }) => (
+const BrowserRouter = ({ routes, prefetch, basename, keyLength, ...rest }) => (
   <History
-    createHistory={makeCreateHistory(routes, fetch)}
+    createHistory={makeCreateHistory(routes, prefetch)}
     historyOptions={{ basename, keyLength }}>
     {({ history, action, location }) => (
       <StaticRouter
@@ -44,7 +44,7 @@ const BrowserRouter = ({ routes, fetch, basename, keyLength, ...rest }) => (
 
 BrowserRouter.propTypes = {
   routes: PropTypes.array.isRequired,
-  fetch: PropTypes.func.isRequired,
+  prefetch: PropTypes.func.isRequired,
   basename: PropTypes.string,
   keyLength: PropTypes.number,
   children: PropTypes.oneOfType([
@@ -53,11 +53,11 @@ BrowserRouter.propTypes = {
   ])
 };
 
-const serverFetch = ({ routes, fetch, location }) => {
+const serverPrefetch = ({ routes, prefetch, location }) => {
   try {
     const createLocals = makeCreateLocals(routes);
     const locals = createLocals(location);
-    const result = fetch(locals);
+    const result = prefetch(locals);
 
     return Promise.resolve(result);
   } catch (err) {
@@ -65,4 +65,4 @@ const serverFetch = ({ routes, fetch, location }) => {
   }
 };
 
-export { BrowserRouter, serverFetch };
+export { BrowserRouter, serverPrefetch };

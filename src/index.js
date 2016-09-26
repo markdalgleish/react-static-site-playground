@@ -9,12 +9,12 @@ import { ServerRouter, createServerRenderContext } from 'react-router';
 import { Provider as StoreProvider } from 'react-redux';
 import { trigger } from 'redial';
 
-import { BrowserRouter, serverFetch } from './react-router-addons-fetch';
+import { BrowserRouter, serverPrefetch } from './react-router-prefetch';
 import createStore from './store/createStore';
 import routes from './routes';
 import App from './App';
 
-const makeFetch = ({ dispatch }) => ({ components }) => {
+const prefetchForStore = ({ dispatch }) => ({ components }) => {
   const locals = { dispatch };
 
   if (typeof window !== 'undefined' && window.REDUX_INITIAL_STATE) {
@@ -27,11 +27,10 @@ const makeFetch = ({ dispatch }) => ({ components }) => {
 // Client render
 if (typeof document !== 'undefined') {
   const store = createStore(window.REDUX_INITIAL_STATE);
-  const { dispatch } = store;
 
   render((
     <StoreProvider store={store}>
-      <BrowserRouter routes={routes} fetch={makeFetch({ dispatch })}>
+      <BrowserRouter routes={routes} prefetch={prefetchForStore(store)}>
         <App />
       </BrowserRouter>
     </StoreProvider>
@@ -41,12 +40,11 @@ if (typeof document !== 'undefined') {
 // Render function for static-site-generator-webpack-plugin
 export default ({ path, assets, template }, callback) => {
   const store = createStore();
-  const { dispatch } = store;
 
   const location = { pathname: path };
-  const fetch = makeFetch({ dispatch });
+  const prefetch = prefetchForStore(store);
 
-  serverFetch({ routes, fetch, location }).then(() => {
+  serverPrefetch({ routes, prefetch, location }).then(() => {
     const context = createServerRenderContext();
 
     const html = renderToString(
