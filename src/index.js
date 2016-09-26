@@ -14,7 +14,8 @@ import createStore from './store/createStore';
 import routes from './routes';
 import App from './App';
 
-const prefetchForStore = ({ dispatch }) => ({ components }) => {
+const makePrefetch = ({ store }) => ({ components }) => {
+  const { dispatch } = store;
   const locals = { dispatch };
 
   if (typeof window !== 'undefined' && window.REDUX_INITIAL_STATE) {
@@ -30,7 +31,7 @@ if (typeof document !== 'undefined') {
 
   render((
     <StoreProvider store={store}>
-      <BrowserRouter routes={routes} prefetch={prefetchForStore(store)}>
+      <BrowserRouter routes={routes} prefetch={makePrefetch({ store })}>
         <App />
       </BrowserRouter>
     </StoreProvider>
@@ -42,7 +43,7 @@ export default ({ path, assets, template }, callback) => {
   const store = createStore();
 
   const location = { pathname: path };
-  const prefetch = prefetchForStore(store);
+  const prefetch = makePrefetch({ store });
 
   serverPrefetch({ routes, prefetch, location }).then(() => {
     const context = createServerRenderContext();
