@@ -39,10 +39,9 @@ if (typeof document !== 'undefined') {
 }
 
 // Render function for static-site-generator-webpack-plugin
-export default ({ path, assets, template }, callback) => {
+export default ({ path: location, assets, template }, callback) => {
   const store = createStore();
 
-  const location = { pathname: path };
   const prefetch = makePrefetch({ store });
 
   serverPrefetch({ routes, prefetch, location }).then(() => {
@@ -50,7 +49,7 @@ export default ({ path, assets, template }, callback) => {
 
     const html = renderToString(
       <StoreProvider store={store}>
-        <ServerRouter location={path} context={context}>
+        <ServerRouter location={location} context={context}>
           <App />
         </ServerRouter>
       </StoreProvider>

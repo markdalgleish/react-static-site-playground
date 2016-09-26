@@ -33,6 +33,7 @@
     "html-loader": "^0.2.3",
     "json-loader": "^0.5.1",
     "markdown-loader": "^0.1.2",
+    "query-string": "^4.2.3",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-history": "^0.13.3",

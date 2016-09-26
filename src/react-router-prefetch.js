@@ -1,8 +1,24 @@
 import React, { PropTypes } from 'react';
 import createBrowserHistory from 'history/createBrowserHistory';
+import { parsePath } from 'history/PathUtils';
+import { parse as parseQuery } from 'query-string';
 import History from 'react-history/History';
 import { StaticRouter } from 'react-router';
 import { matchRoutesToLocation } from 'react-router-addons-routes';
+
+const getLocation = input => {
+  if (typeof input === 'string') {
+    const location = parsePath(input);
+
+    location.query = location.search !== '' ?
+      parseQuery(location.search) :
+      null;
+
+    return location;
+  }
+
+  return input;
+}
 
 const makeCreateLocals = routes => location => {
   const matchedRoutes = matchRoutesToLocation(routes, location);
@@ -55,8 +71,9 @@ BrowserRouter.propTypes = {
 
 const serverPrefetch = ({ routes, prefetch, location }) => {
   try {
+    const parsedLocation = getLocation(location);
     const createLocals = makeCreateLocals(routes);
-    const locals = createLocals(location);
+    const locals = createLocals(parsedLocation);
     const result = prefetch(locals);
 
     return Promise.resolve(result);
