@@ -1,6 +1,6 @@
 # react-static-site-playground
 
-Warning: This is still very much a work in progress. Also, this might be a terrible idea.
+WIP. Don't assume anything in this project is production ready.
 
 ## Run it
 
