@@ -14,13 +14,11 @@ import createStore from './store/createStore';
 import routes from './routes';
 import App from './App';
 
-const makePrefetch = ({ store }) => ({ components }) => {
+const makePrefetch = ({ store }) => ({ rehydrating, components }) => {
   const { dispatch } = store;
   const locals = { dispatch };
 
-  if (typeof window !== 'undefined' && window.REDUX_INITIAL_STATE) {
-    delete window.REDUX_INITIAL_STATE;
-  } else {
+  if (!rehydrating) {
     return trigger('prefetch', components, locals);
   }
 };

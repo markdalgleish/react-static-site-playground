@@ -20,14 +20,20 @@ const getLocation = input => {
   return input;
 }
 
-const makeCreateLocals = routes => location => {
+const makeCreateLocals = routes => ({ browser, location, firstRender }) => {
   const matchedRoutes = matchRoutesToLocation(routes, location);
+
   const components = matchedRoutes.map(route => route.component);
+  const server = !browser;
+  const rehydrating = browser && firstRender;
 
   return {
     routes: matchedRoutes,
     components,
-    location
+    location,
+    browser,
+    server,
+    rehydrating
   };
 };
 
@@ -35,8 +41,8 @@ const makeCreateHistory = (routes, prefetch) => (...args) => {
   const history = createBrowserHistory(...args);
   const createLocals = makeCreateLocals(routes);
 
-  prefetch(createLocals(history.location));
-  history.listen(location => prefetch(createLocals(location)));
+  prefetch(createLocals({ location: history.location, firstRender: true, browser: true }));
+  history.listen(location => prefetch(createLocals({ location, firstRender: false, browser: true })));
 
   return history;
 };
@@ -73,7 +79,7 @@ const serverPrefetch = ({ routes, prefetch, location }) => {
   try {
     const parsedLocation = getLocation(location);
     const createLocals = makeCreateLocals(routes);
-    const locals = createLocals(parsedLocation);
+    const locals = createLocals({ location: parsedLocation, firstRender: true, browser: false });
     const result = prefetch(locals);
 
     return Promise.resolve(result);
