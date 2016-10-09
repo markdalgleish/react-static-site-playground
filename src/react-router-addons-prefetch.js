@@ -21,7 +21,7 @@ const getLocation = input => {
 }
 
 const makeCreateLocals = routes => ({ browser, location, firstRender }) => {
-  const matchedRoutes = matchRoutesToLocation(routes, location);
+  const { matchedRoutes } = matchRoutesToLocation(routes, location);
 
   const components = matchedRoutes.map(route => route.component);
   const server = !browser;

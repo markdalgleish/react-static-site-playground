@@ -39,7 +39,7 @@
     "react-history": "^0.13.3",
     "react-redux": "^4.4.0",
     "react-router": "4.0.0-alpha.3",
-    "react-router-addons-routes": "0.0.1",
+    "react-router-addons-routes": "0.0.2",
     "redial": "^0.5.0",
     "redux": "^3.3.1",
     "redux-thunk": "^1.0.3",
