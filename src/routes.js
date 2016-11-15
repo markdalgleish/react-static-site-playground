@@ -7,7 +7,7 @@ export default [
     component: Root,
     routes: [
       {
-        pattern: '/blog/:postName',
+        pattern: 'blog/:postName/',
         component: Blog
       }
     ]
