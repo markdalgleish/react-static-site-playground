@@ -9,17 +9,16 @@ import { ServerRouter, createServerRenderContext } from 'react-router';
 import { Provider as StoreProvider } from 'react-redux';
 import { trigger } from 'redial';
 
-import { BrowserRouter, serverPrefetch } from './react-router-addons-prefetch';
+import { BrowserRouter, serverPrefetch } from './react-router-prefetch';
 import createStore from './store/createStore';
 import routes from './routes';
 import App from './App';
 
 const makePrefetch = ({ store }) => ({ rehydrating, components }) => {
   const { dispatch } = store;
-  const locals = { dispatch };
 
   if (!rehydrating) {
-    return trigger('prefetch', components, locals);
+    return trigger('prefetch', components, { dispatch });
   }
 };
 
