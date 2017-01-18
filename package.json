@@ -7,8 +7,7 @@
     "start": "webpack-dev-server --content-base dist/",
     "test": "npm run build",
     "build": "rm -rf dist/* && webpack",
-    "deploy": "gh-pages -d dist -m \"Updates [skip ci]\"",
-    "deploy-travis": "npm run deploy -- -r https://${GH_TOKEN}@github.com/markdalgleish/react-static-site-playground"
+    "deploy": "gh-pages -d dist -m \"Updates [skip ci]\""
   },
   "repository": {
     "type": "git",

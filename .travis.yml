@@ -4,7 +4,7 @@ node_js:
 before_script:
   - npm prune
 after_success:
-  - npm run deploy-travis
+  - ./scripts/deploy.sh
 branches:
   only:
     - master
