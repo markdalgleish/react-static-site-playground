@@ -1,21 +1,29 @@
 var path = require('path');
-var pkg = require('../package.json');
-
 var ghpages = require('gh-pages');
+var basePath = path.join(__dirname, '../dist');
+var repoUrl = require('../package.json').repository.url;
 
-var repoUrl = process.env.GH_TOKEN ?
-  pkg.repository.url.replace(/^https?:\/\//, 'http://' + process.env.GH_TOKEN + '@') :
-  pkg.repository.url;
-
-ghpages.publish(path.join(__dirname, '../dist'), {
-  repo: repoUrl,
-  logger: function(message) {
-    if (process.env.GH_TOKEN) {
-      message = message.replace(new RegExp(process.env.GH_TOKEN, 'g'), '[GH_TOKEN]');
-    }
-
-    console.log(message);
+var makeConfig = function(token) {
+  if (token) {
+    // CI deployment config
+    return {
+      repo: repoUrl.replace(/^https?:\/\//, 'http://' + token + '@'),
+      logger: function(message) {
+        // Hide token from build logs
+        message = message.replace(new RegExp(token, 'g'), '[TOKEN]');
+        console.log(message);
+      }
+    };
   }
-}, function() {
+
+  // Local deployment config
+  return {
+    logger: function (message) {
+      console.log(message)
+    }
+  };
+};
+
+ghpages.publish(basePath, makeConfig(process.env.GH_TOKEN), function() {
   console.log('Deployment complete!');
 });
