@@ -4,9 +4,9 @@ node_js:
 before_script:
   - npm prune
 after_success:
-  - git config --global user.name "Travis-CI"
-    git config --global user.email "travis@example.com"
-    node scripts/deploy.js
+  - git config --global user.name "Travis-CI";
+    git config --global user.email "travis@example.com";
+    node scripts/deploy.js;
 branches:
   only:
     - master
