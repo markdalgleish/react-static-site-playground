@@ -7,9 +7,11 @@ var repoUrl = process.env.GH_TOKEN ?
   pkg.repository.url.replace(/^https?:\/\//, 'http://' + process.env.GH_TOKEN + '@') :
   pkg.repository.url;
 
-ghpages.publish(path.join(__dirname, 'dist'), {
+ghpages.publish(path.join(__dirname, '../dist'), {
   repo: repoUrl,
-  logger: console.log.bind(console)
+  logger: function(message) {
+    console.log(message);
+  }
 }, function() {
   console.log('Deployment complete!');
 });
