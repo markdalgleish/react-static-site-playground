@@ -18,7 +18,7 @@ var log = function(message) {
 var makeConfig = function() {
   return {
     repo: GH_TOKEN ?
-      repoUrl.replace(/^https?:\/\//, 'http://' + GH_TOKEN + '@') :
+      repoUrl.replace(/^https?:\/\//, 'https://' + GH_TOKEN + '@') :
       repoUrl,
     logger: log
   };
