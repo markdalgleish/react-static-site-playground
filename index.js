@@ -34284,7 +34284,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"link":"Navigation__link__🥃"};
+	module.exports = {"link":"Navigation__link__🇰🇬"};
 
 /***/ },
 /* 271 */,
